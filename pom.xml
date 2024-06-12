@@ -15,17 +15,67 @@
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+
+
     <!-- Dependencies versions -->
+    <javalin.version>5.6.5</javalin.version>
     <junit.version>5.10.2</junit.version>
     <mockito.version>5.11.0</mockito.version>
+    <retrofit.version>2.11.0</retrofit.version>
+    <slf4j.version>2.0.13</slf4j.version>
   </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <finalName>TPDDSApp</finalName>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <appendAssemblyId>false</appendAssemblyId>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
   <dependencies>
     <!-- Libs -->
     <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
-      <artifactId>jackson-dataformat-xml</artifactId>
-      <version>2.16.0</version>
+      <groupId>com.github.ezequieljsosa</groupId>
+      <artifactId>dds-eval-tp2024</artifactId>
+      <version>0.0.22</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <version>2.17.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.squareup.retrofit2</groupId>
+      <artifactId>retrofit</artifactId>
+      <version>${retrofit.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.squareup.retrofit2</groupId>
+      <artifactId>converter-jackson</artifactId>
+      <version>${retrofit.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.javalin</groupId>
+      <artifactId>javalin</artifactId>
+      <version>${javalin.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j.version}</version>
     </dependency>
 
     <!-- Tools -->
@@ -35,18 +85,36 @@
       <version>1.18.32</version>
       <scope>provided</scope>
     </dependency>
+
     <!-- Test-->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.14</version>
+    </dependency>
+
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
       <version>${mockito.version}</version>
     </dependency>
+    <!-- DataBase -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>2.1.214</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.6.0</version>
+    </dependency>
 
     <dependency>
-      <groupId>com.github.ezequieljsosa</groupId>
-      <artifactId>dds-eval-tp2024</artifactId>
-      <version>0.0.22</version>
-	      
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>5.6.15.Final</version>
     </dependency>
 
   </dependencies>
