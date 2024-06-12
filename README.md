@@ -7,3 +7,4 @@ https://{miproyecto}.onrender.com
 ```
 
 Template para TP DDS 2024 - Entrega 1
+https://docs.google.com/document/d/10aBJntLd5KtYhKsVzgCCJPVQjdv1FOc3_N4LKWSxxK8/edit
