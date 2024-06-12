@@ -8,3 +8,9 @@ https://{miproyecto}.onrender.com
 
 Template para TP DDS 2024 - Entrega 1
 https://docs.google.com/document/d/10aBJntLd5KtYhKsVzgCCJPVQjdv1FOc3_N4LKWSxxK8/edit
+
+mvn clean compile exec:java -Dexec.mainClass="ar.edu.utn.dds.k3003.Evaluador"
+
+mvn clean compile exec:java -Dexec.mainClass="ar.edu.utn.dds.k3003.app.WebApp"
+
+mvn clean compile exec:java -Dexec.mainClass="ar.edu.utn.dds.k3003.EvaluadorAPI" -Dexec.args="http://localhost:8080 viandas"
