@@ -28,6 +28,7 @@ public class WebApp {
     app.get("/viandas/{qr}",viandaController::buscarPorQr);
     app.get("/viandas/{qr}/vencida",viandaController::verificarVencimiento);
     app.patch("/viandas/{qr}",viandaController::modificarHeladera);
+    app.patch("/viandas/{qr}",viandaController::modificarHeladera);
   }
 
   public static ObjectMapper createObjectMapper() {

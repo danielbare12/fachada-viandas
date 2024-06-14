@@ -8,6 +8,8 @@ import ar.edu.utn.dds.k3003.facades.dtos.TemperaturaDTO;
 import java.util.List;
 import java.util.NoSuchElementException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.javalin.http.HttpStatus;
+import lombok.SneakyThrows;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
@@ -19,7 +21,7 @@ public class HeladerasProxy implements FachadaHeladeras {
   public HeladerasProxy(ObjectMapper objectMapper) {
     var env = System.getenv();
 
-    this.endpoint = env.getOrDefault("URL_HELADERAS", "http://localhost:8080/");
+    this.endpoint = env.getOrDefault("URL_HELADERAS", "https://two024-tp-entrega-3-mogox123.onrender.com/");
 
     var retrofit = new Retrofit.Builder().baseUrl(this.endpoint)
         .addConverterFactory(JacksonConverterFactory.create(objectMapper))
@@ -53,8 +55,17 @@ public class HeladerasProxy implements FachadaHeladeras {
   }
 
   @Override
+  @SneakyThrows
   public List<TemperaturaDTO> obtenerTemperaturas(Integer integer) {
-    return null;
+    Response<List<TemperaturaDTO>> execute = service.get(integer).execute();
+
+    if (execute.isSuccessful()) {
+      return execute.body();
+    }
+    if (execute.code() == HttpStatus.NOT_FOUND.getCode()) {
+      throw new NoSuchElementException("no se encontro la heladera " + integer);
+    }
+    throw new RuntimeException("Error conectandose con el componente viandas");
   }
 
   @Override

@@ -43,9 +43,7 @@ public class ViandaController {
 
   public void modificarHeladera(Context context){
     var qr = context.pathParamAsClass("qr",String.class).get();
-    System.out.println("------------------------------------");
     HeladeraDestino heladera = context.bodyAsClass(HeladeraDestino.class);
-    System.out.println("El id es " + heladera.getHeladeraDestino());
     var ViandaDtoRta = this.fachada.modificarHeladera(qr,heladera.getHeladeraDestino());
     context.json(ViandaDtoRta);
   }
