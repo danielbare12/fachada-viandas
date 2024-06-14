@@ -16,6 +16,7 @@ public class WebApp {
   public static void main(String[] args) {
     var fachada = new Fachada();
     var objectMapper = createObjectMapper();
+
     Integer port = Integer.parseInt(System.getProperty("port","8080"));
     Javalin app = Javalin.create().start(port);
     var viandaController = new ViandaController(fachada);
@@ -26,7 +27,7 @@ public class WebApp {
     app.get("/viandas/search/findByColaboradorIdAndAnioAndMes",viandaController::buscarPorColaboradorIdMesYAnio);
     app.get("/viandas/{qr}",viandaController::buscarPorQr);
     app.get("/viandas/{qr}/vencida",viandaController::verificarVencimiento);
-    app.patch("/viandas/{qrVianda}",viandaController::modificarHeladera);
+    app.patch("/viandas/{qr}",viandaController::modificarHeladera);
   }
 
   public static ObjectMapper createObjectMapper() {

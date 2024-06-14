@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class ViandaRepository {
   private static AtomicLong seqId = new AtomicLong();
   //private Collection<Vianda> viandas;
+  
   static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("copiamedb");;;
   EntityManager entityManager = entityManagerFactory.createEntityManager(); ;
 
@@ -63,5 +64,12 @@ public class ViandaRepository {
     return viandas.stream().filter(v -> v.getColaboradorId() == idColab
     && mes == v.getFechaElaboracion().getMonthValue()
     && anio == v.getFechaElaboracion().getYear()).toList();
+  }
+
+  public void update(Vianda vianda){
+    entityManager.getTransaction().begin();
+    entityManager.merge(vianda);
+    entityManager.getTransaction().commit();
+
   }
 }

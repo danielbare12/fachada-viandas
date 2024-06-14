@@ -1,13 +1,16 @@
 package ar.edu.utn.dds.k3003.model;
 
 public class HeladeraDestino {
-    private Integer heladeraDestino;
+  private int heladeraDestino;
 
-  public HeladeraDestino(Integer heladeraDestino) {
+  public HeladeraDestino() {
+  }
+
+  public HeladeraDestino(int heladeraDestino) {
     this.heladeraDestino = heladeraDestino;
   }
 
-  public Integer getHeladeraDestino() {
+  public int getHeladeraDestino() {
     return heladeraDestino;
   }
 }

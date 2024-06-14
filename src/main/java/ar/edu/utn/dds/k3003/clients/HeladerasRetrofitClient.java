@@ -6,6 +6,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface HeladerasRetrofitClient {
-  @GET("viandas/{qr}")
-  Call<HeladeraDTO> get(@Path("qr") String qr);
+  @GET("heladeras/{id}")
+  Call<HeladeraDTO> get(@Path("id") Long id);
 }

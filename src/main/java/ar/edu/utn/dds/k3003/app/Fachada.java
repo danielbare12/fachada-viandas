@@ -9,6 +9,7 @@ import ar.edu.utn.dds.k3003.model.Vianda;
 import ar.edu.utn.dds.k3003.repositories.ViandaMapper;
 import ar.edu.utn.dds.k3003.repositories.ViandaRepository;
 import lombok.Getter;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -70,6 +71,7 @@ public class Fachada implements ar.edu.utn.dds.k3003.facades.FachadaViandas{
   public ViandaDTO modificarHeladera(String s, int i) {
     Vianda vianda = this.viandaRepository.findByQr(s);
     vianda.setHeladeraId(i);
+    this.viandaRepository.update(vianda);
     return viandaMapper.map(vianda);
   }
 
