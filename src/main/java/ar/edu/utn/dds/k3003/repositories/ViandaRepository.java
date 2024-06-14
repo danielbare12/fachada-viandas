@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class ViandaRepository {
   private static AtomicLong seqId = new AtomicLong();
   //private Collection<Vianda> viandas;
-  
+
   static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("copiamedb");;;
   EntityManager entityManager = entityManagerFactory.createEntityManager(); ;
 
