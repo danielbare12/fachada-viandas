@@ -47,4 +47,9 @@ public class ViandaController {
     var ViandaDtoRta = this.fachada.modificarHeladera(qr,heladera.getHeladeraDestino());
     context.json(ViandaDtoRta);
   }
+
+  public void listar(Context context){
+    var ViandaDtoRta = this.fachada.viandasLista();
+    context.json(ViandaDtoRta);
+  }
 }

@@ -21,8 +21,8 @@ public class WebApp {
     var viandaController = new ViandaController(fachada);
     fachada.setHeladerasProxy(new HeladerasProxy(objectMapper));
 
-    app.get("/",ctx -> ctx.result("Va'e sha pareiko"));
     app.post("/viandas",viandaController::agregar);
+    app.get("/viandas",viandaController::listar);
     app.get("/viandas/search/findByColaboradorIdAndAnioAndMes",viandaController::buscarPorColaboradorIdMesYAnio);
     app.get("/viandas/{qr}",viandaController::buscarPorQr);
     app.get("/viandas/{qr}/vencida",viandaController::verificarVencimiento);

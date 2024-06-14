@@ -3,6 +3,7 @@ package ar.edu.utn.dds.k3003.repositories;
 import ar.edu.utn.dds.k3003.model.Vianda;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class ViandaRepository {
   private static AtomicLong seqId = new AtomicLong();
   //private Collection<Vianda> viandas;
-  static EntityManagerFactory entityManagerFactory;
+  static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("copiamedb");;;
   EntityManager entityManager = entityManagerFactory.createEntityManager(); ;
 
   /*public ViandaRepository() {
@@ -22,14 +23,23 @@ public class ViandaRepository {
   }*/
 
   public Vianda save(Vianda vianda){
-    if(vianda.getId() < 0){
-      vianda.setId(seqId.getAndIncrement());
+    //if(vianda.getId() <= 0){
+    //  vianda.setId(seqId.getAndIncrement());
       //this.viandas.add(vianda);
+      entityManager.getTransaction().begin();
       entityManager.persist(vianda);
       entityManager.getTransaction().commit();
-    }
+    //  entityManager.close();
+    //}
 
     return vianda;
+  }
+
+  public List<Vianda> list(){
+
+    List<Vianda> viandas = entityManager.createQuery("from Vianda", Vianda.class).getResultList();
+
+    return viandas;
   }
 
   public Vianda findById(Long id){

@@ -73,4 +73,9 @@ public class Fachada implements ar.edu.utn.dds.k3003.facades.FachadaViandas{
     return viandaMapper.map(vianda);
   }
 
+  public List<ViandaDTO> viandasLista() throws NoSuchElementException {
+    List<Vianda> viandas = this.viandaRepository.list();
+    return this.viandaMapper.mapAll(viandas);
+  }
+
 }
