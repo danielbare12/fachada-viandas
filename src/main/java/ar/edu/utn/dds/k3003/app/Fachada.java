@@ -63,7 +63,7 @@ public class Fachada implements ar.edu.utn.dds.k3003.facades.FachadaViandas{
   public boolean evaluarVencimiento(String s) throws NoSuchElementException {
     Vianda vianda = this.viandaRepository.findByQr(s);
     List<TemperaturaDTO> temperaturaDTOList = this.fachadaHeladeras.obtenerTemperaturas(vianda.getHeladeraId());
-    boolean band = temperaturaDTOList.stream().anyMatch(t -> t.getTemperatura() >= 5 && LocalDateTime.now().toLocalDate().isEqual(t.getFechaMedicion().toLocalDate()));
+    boolean band = temperaturaDTOList.stream().anyMatch(t -> t.getTemperatura() >= 5);
     return band;
   }
 
