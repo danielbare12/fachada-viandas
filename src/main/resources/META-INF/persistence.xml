@@ -6,9 +6,9 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd" version="2.2">
         <class>ar.edu.utn.dds.k3003.model.Vianda</class>
 
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://dpg-cpm5s3qj1k6c73a2b23g-a.oregon-postgres.render.com/copiamedb_udpq"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://dpg-crrmemlds78s73dq8r10-a.oregon-postgres.render.com/copiamedb_vy1j"/>
             <property name="javax.persistence.jdbc.user" value="copiamedb_udpq_user"/>
-            <property name="javax.persistence.jdbc.password" value="SX5AzwvSAL0MYP6OSD99zoIpH7KKW6Hp"/>
+            <property name="javax.persistence.jdbc.password" value="vB0O8ItBuKaVCcKKwHQvpZ40xWfV3HWi"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
 
             <property name="hibernate.hbm2ddl.auto" value="update"/>
