@@ -7,9 +7,18 @@ import ar.edu.utn.dds.k3003.model.HeladeraDestino;
 import ar.edu.utn.dds.k3003.model.Respuesta;
 import io.javalin.http.HttpStatus;
 import io.javalin.http.Context;
+import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.StatsDClient;
 
 public class ViandaController {
   private final Fachada fachada;
+
+  // Instancia de StatsDClient
+  private static final StatsDClient statsd = new NonBlockingStatsDClient(
+      "my.prefix",                  // Prefijo para las métricas
+      "localhost",                  // Dirección del agente Datadog
+      8125                          // Puerto donde escucha el agente
+  );
 
   public ViandaController(Fachada fachada){
     this.fachada = fachada;
@@ -18,6 +27,11 @@ public class ViandaController {
   public void agregar(Context context){
     ViandaDTO viandaDto = context.bodyAsClass(ViandaDTO.class);
     var viandaDtoRta = this.fachada.agregar(viandaDto);
+
+    statsd.incrementCounter("viandas_agregadas");
+
+    statsd.gauge("viandas_agregadas", 1);
+    statsd.stop();
     context.json(viandaDtoRta);
     context.status(HttpStatus.CREATED);
   }

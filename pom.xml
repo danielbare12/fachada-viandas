@@ -117,6 +117,12 @@
       <version>5.6.15.Final</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.timgroup</groupId>
+      <artifactId>java-statsd-client</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+
   </dependencies>
 
   <repositories>
