@@ -11,8 +11,6 @@ RUN mvn clean package assembly:single -DskipTests
 #
 FROM openjdk:17-jdk-slim
 
-ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
-
 COPY --from=build /target/TPDDSApp.jar TPDDSApp.jar
 # ENV PORT=8080
 EXPOSE 8080
