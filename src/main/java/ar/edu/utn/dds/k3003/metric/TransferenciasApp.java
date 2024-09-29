@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 public class TransferenciasApp {
 
 	public static void main(final String... args) {
-		/*
+
 		log.info("starting up the server");
 
 		final var metricsUtils = new DDMetricsUtils("transferencias");
@@ -67,6 +67,6 @@ public class TransferenciasApp {
 		if(transferencia.getAmount() <= 0) {
 			throw new IllegalArgumentException();
 		}
-	*/
+
 	}
 }
