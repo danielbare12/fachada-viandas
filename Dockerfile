@@ -9,8 +9,8 @@ RUN mvn clean package assembly:single -DskipTests
 #
 # Package stage
 #
-FROM openjdk:17-jdk-slim
 
+FROM openjdk:11-jdk-alpine
 COPY --from=build /target/TPDDSApp.jar TPDDSApp.jar
 # Instalar el Datadog Agent
 COPY datadog-agent /usr/local/datadog/
@@ -22,6 +22,9 @@ ENV DD_TAGS="env:production,service:myapp"
 
 # Iniciar el Datadog Agent
 CMD ["/usr/local/datadog/datadog-agent", "-d"]
+
+FROM openjdk:17-jdk-slim
+
 # ENV PORT=8080
 EXPOSE 8080
 ENTRYPOINT ["java","-classpath","TPDDSApp.jar","ar.edu.utn.dds.k3003.app.WebApp"]
