@@ -39,7 +39,7 @@ public class DDMetricsUtils {
 
 			@Override
 			public String get(String k) {
-				return null; // accept the rest of the defaults
+				return "cfdac9393fc9ef617570532c892a072a"; // accept the rest of the defaults
 			}
 		};
 		registry = new DatadogMeterRegistry(config, Clock.SYSTEM);
