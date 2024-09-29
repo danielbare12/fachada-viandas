@@ -15,8 +15,8 @@ COPY --from=build /target/TPDDSApp.jar TPDDSApp.jar
 
 # ENV PORT=8080
 
-FROM openjdk:11-jdk-alpine
-COPY --from=build /target/TPDDSApp.jar TPDDSApp.jar
+FROM openjdk:17-jdk-alpine
+
 # Instalar el Datadog Agent
 COPY datadog-agent /usr/local/datadog/
 RUN chmod +x /usr/local/datadog/datadog-agent
