@@ -146,12 +146,6 @@
     <version>1.2.11</version> <!-- O la versión más reciente -->
     </dependency>
 
-    <dependency>
-      <groupId>com.datadoghq</groupId>
-      <artifactId>java-dogstatsd-client</artifactId>
-      <version>4.4.2</version>
-    </dependency>
-
   </dependencies>
 
   <repositories>
