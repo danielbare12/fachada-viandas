@@ -39,7 +39,7 @@ public class WebApp {
 
     final var app = Javalin.create(config -> {
       config.registerPlugin(micrometerPlugin);
-    });
+    }).start(port);
 
     myGauge.set(1);
     //Javalin app = Javalin.create().start(port);
