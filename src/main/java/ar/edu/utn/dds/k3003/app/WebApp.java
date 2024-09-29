@@ -27,13 +27,15 @@ public class WebApp {
     var fachada = new Fachada();
     var objectMapper = createObjectMapper();
     log.info("starting up the server");
+    Integer port = Integer.parseInt(System.getProperty("port","8080"));
+    /*
 
     final var metricsUtils = new DDMetricsUtils("transferencias");
     final var registry = metricsUtils.getRegistry();
 
     // Metricas
     final var myGauge = registry.gauge("dds.unGauge", new AtomicInteger(0));
-    Integer port = Integer.parseInt(System.getProperty("port","8080"));
+
 
     final var micrometerPlugin = new MicrometerPlugin(config -> config.registry = registry);
 
@@ -42,7 +44,9 @@ public class WebApp {
     }).start(port);
 
     myGauge.set(1);
-    //Javalin app = Javalin.create().start(port);
+    */
+
+    Javalin app = Javalin.create().start(port);
     var viandaController = new ViandaController(fachada);
     fachada.setHeladerasProxy(new HeladerasProxy(objectMapper));
 
