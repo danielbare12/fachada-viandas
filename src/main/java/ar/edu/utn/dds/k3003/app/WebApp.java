@@ -26,13 +26,6 @@ public class WebApp {
   public static void main(String[] args) {
     var fachada = new Fachada();
     var objectMapper = createObjectMapper();
-    log.info("starting up the server");
-    var a = 1;
-    final var metricsUtils = new DDMetricsUtils("transferencias");
-    final var registry = metricsUtils.getRegistry();
-
-    // Metricas
-    final var myGauge = registry.gauge("dds.unGauge", new AtomicInteger(0));
 
     Integer port = Integer.parseInt(System.getProperty("port","8080"));
     Javalin app = Javalin.create().start(port);
