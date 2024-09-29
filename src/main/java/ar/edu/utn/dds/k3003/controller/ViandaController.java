@@ -50,19 +50,19 @@ public class ViandaController {
   }
 
   public void agregar(Context context){
-    final var metricsUtils = new DDMetricsUtils("transferencias");
-    final var registry = metricsUtils.getRegistry();
-    final var myGauge = registry.gauge("dds.unGauge", new AtomicInteger(0));
+    //final var metricsUtils = new DDMetricsUtils("transferencias");
+    //final var registry = metricsUtils.getRegistry();
+    //final var myGauge = registry.gauge("dds.unGauge", new AtomicInteger(0));
 
     ViandaDTO viandaDto = context.bodyAsClass(ViandaDTO.class);
     var viandaDtoRta = this.fachada.agregar(viandaDto);
     System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    statsd.incrementCounter("viandas_agregadas");
+    //statsd.incrementCounter("viandas_agregadas");
     System.out.println("!!!!!???????????????????????????!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-    statsd.gauge("viandas_agregadas", 1);
-    myGauge.set(1);
-    statsd.stop();
+    //statsd.gauge("viandas_agregadas", 1);
+    //myGauge.set(1);
+    //statsd.stop();
     context.json(viandaDtoRta);
     context.status(HttpStatus.CREATED);
   }
