@@ -29,7 +29,7 @@ public class DDMetricsUtils {
 
 			@Override
 			public String apiKey() {
-				return System.getenv("cfdac9393fc9ef617570532c892a072a");
+				return System.getenv("DDAPI");
 			}
 
 			@Override
