@@ -19,6 +19,7 @@
 
     <!-- Dependencies versions -->
     <javalin.version>5.6.5</javalin.version>
+    <micrometer.version>1.13.0</micrometer.version>
     <junit.version>5.10.2</junit.version>
     <mockito.version>5.11.0</mockito.version>
     <retrofit.version>2.11.0</retrofit.version>
@@ -121,6 +122,28 @@
       <groupId>com.timgroup</groupId>
       <artifactId>java-statsd-client</artifactId>
       <version>3.1.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.javalin</groupId>
+      <artifactId>javalin-micrometer</artifactId>
+      <version>${javalin.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+      <version>${micrometer.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-datadog</artifactId>
+      <version>${micrometer.version}</version>
+    </dependency>
+
+    <dependency>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-classic</artifactId>
+    <version>1.2.11</version> <!-- O la versión más reciente -->
     </dependency>
 
   </dependencies>
