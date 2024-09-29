@@ -15,7 +15,7 @@ COPY --from=build /target/TPDDSApp.jar TPDDSApp.jar
 
 # ENV PORT=8080
 
-FROM openjdk:17-jdk-alpine
+FROM openjdk:17-jdk-slim
 
 RUN apt-get update && apt-get install -y datadog-agent
 
