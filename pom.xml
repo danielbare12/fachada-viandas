@@ -29,6 +29,7 @@
   <build>
     <plugins>
       <plugin>
+
         <artifactId>maven-assembly-plugin</artifactId>
         <configuration>
           <finalName>TPDDSApp</finalName>
@@ -38,6 +39,7 @@
           <appendAssemblyId>false</appendAssemblyId>
         </configuration>
       </plugin>
+
     </plugins>
   </build>
 
