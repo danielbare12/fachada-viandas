@@ -17,7 +17,7 @@ public class ViandaController {
   private static final StatsDClient statsd = new NonBlockingStatsDClient(
       "my.prefix",                  // Prefijo para las métricas
       "192.168.1.100",                  // Dirección del agente Datadog
-      8126           // Puerto donde escucha el agente
+      5002           // Puerto donde escucha el agente
   );
 
   public ViandaController(Fachada fachada){
