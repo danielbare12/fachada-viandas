@@ -16,8 +16,8 @@ public class ViandaController {
   // Instancia de StatsDClient
   private static final StatsDClient statsd = new NonBlockingStatsDClient(
       "my.prefix",                  // Prefijo para las métricas
-      "localhost",                  // Dirección del agente Datadog
-      5002           // Puerto donde escucha el agente
+      "us5.datadoghq.com",                  // Dirección del agente Datadog
+      8126           // Puerto donde escucha el agente
   );
 
   public ViandaController(Fachada fachada){
