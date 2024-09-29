@@ -28,7 +28,7 @@ public class WebApp {
     var objectMapper = createObjectMapper();
     log.info("starting up the server");
     Integer port = Integer.parseInt(System.getProperty("port","8080"));
-    /*
+
 
     final var metricsUtils = new DDMetricsUtils("transferencias");
     final var registry = metricsUtils.getRegistry();
@@ -44,9 +44,9 @@ public class WebApp {
     }).start(port);
 
     myGauge.set(1);
-    */
 
-    Javalin app = Javalin.create().start(port);
+
+   // Javalin app = Javalin.create().start(port);
     var viandaController = new ViandaController(fachada);
     fachada.setHeladerasProxy(new HeladerasProxy(objectMapper));
 
