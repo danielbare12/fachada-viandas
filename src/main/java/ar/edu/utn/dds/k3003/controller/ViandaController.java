@@ -63,10 +63,14 @@ public class ViandaController {
     System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     //statsd.incrementCounter("viandas_agregadas");
     System.out.println("!!!!!???????????????????????????!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    Integer port = Integer.parseInt(System.getProperty("port","8080"));
     Gauge.builder("Viandas_agregadas", () -> (int)(Math.random() * 1))
         .description("Las viandas que se van agregando")
         .strongReference(true)
         .register(registry);
+    final var micrometerPlugin =
+        new MicrometerPlugin(config -> config.registry = registry);
+    Javalin app = Javalin.create(config -> { config.registerPlugin(micrometerPlugin); }).start(port);
     //statsd.gauge("viandas_agregadas", 1);
     //myGauge.set(1);
     //statsd.stop();
