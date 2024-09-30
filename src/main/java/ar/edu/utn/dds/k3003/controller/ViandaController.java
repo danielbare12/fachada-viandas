@@ -66,11 +66,17 @@ public class ViandaController {
     System.out.println("!!!!!???????????????????????????!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
     registry.config().commonTags("app", "metrics-sample");
-
+/*
     var postCounter = Counter.builder("Viandas_agregadas")
         .description("Las viandas que se van agregando")
         .register(registry);
     postCounter.increment();
+*/
+    Gauge.builder("viandas_agregadas", () -> (int)(1 * 1000))
+        .description("Random number from My-Application.")
+        .strongReference(true)
+        .register(registry);
+    new MicrometerPlugin(config -> config.registry = registry);
     //statsd.gauge("viandas_agregadas", 1);
     //myGauge.set(1);
     //statsd.stop();
