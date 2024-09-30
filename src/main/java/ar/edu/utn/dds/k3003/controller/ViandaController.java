@@ -10,6 +10,7 @@ import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
+import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.step.StepMeterRegistry;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -63,14 +64,13 @@ public class ViandaController {
     System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     //statsd.incrementCounter("viandas_agregadas");
     System.out.println("!!!!!???????????????????????????!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    Integer port = Integer.parseInt(System.getProperty("port","8080"));
-    Gauge.builder("Viandas_agregadas", () -> (int)(Math.random() * 1))
+
+    registry.config().commonTags("app", "metrics-sample");
+
+    var postCounter = Counter.builder("Viandas_agregadas")
         .description("Las viandas que se van agregando")
-        .strongReference(true)
         .register(registry);
-    final var micrometerPlugin =
-        new MicrometerPlugin(config -> config.registry = registry);
-    Javalin app = Javalin.create(config -> { config.registerPlugin(micrometerPlugin); }).start(port);
+    postCounter.increment();
     //statsd.gauge("viandas_agregadas", 1);
     //myGauge.set(1);
     //statsd.stop();

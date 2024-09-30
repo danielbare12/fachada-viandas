@@ -56,7 +56,7 @@ public class WebApp {
     new FileDescriptorMetrics().bindTo(registry);
 
     // agregamos métricas custom de nuestro dominio
-    Gauge.builder("ESTO ES UNA PRUEBA PORFA QUE FUNCION POR DIOS!!", () -> (int)(Math.random() * 100))
+    Gauge.builder("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", () -> (int)(Math.random() * 100))
         .description("Random number from My-Application.")
         .strongReference(true)
         .register(registry);
