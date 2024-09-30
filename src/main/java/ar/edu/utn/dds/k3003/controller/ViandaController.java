@@ -63,7 +63,7 @@ public class ViandaController {
     System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     //statsd.incrementCounter("viandas_agregadas");
     System.out.println("!!!!!???????????????????????????!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    Gauge.builder("Viandas_agregadas", () -> 1)
+    Gauge.builder("Viandas_agregadas", () -> (int)(Math.random() * 1))
         .description("Las viandas que se van agregando")
         .strongReference(true)
         .register(registry);
