@@ -10,11 +10,14 @@ import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
+import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.step.StepMeterRegistry;
 import java.util.concurrent.atomic.AtomicInteger;
 import io.javalin.Javalin;
 import io.javalin.http.HttpStatus;
 import io.javalin.micrometer.MicrometerPlugin;
+import io.micrometer.prometheusmetrics.PrometheusConfig;
+import io.micrometer.prometheusmetrics.PrometheusMeterRegistry;
 import lombok.extern.slf4j.Slf4j;
 import ar.edu.utn.dds.k3003.clients.HeladerasProxy;
 import ar.edu.utn.dds.k3003.controller.ViandaController;
@@ -53,13 +56,17 @@ public class ViandaController {
     //final var metricsUtils = new DDMetricsUtils("transferencias");
     //final var registry = metricsUtils.getRegistry();
     //final var myGauge = registry.gauge("dds.unGauge", new AtomicInteger(0));
+    final var registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
 
     ViandaDTO viandaDto = context.bodyAsClass(ViandaDTO.class);
     var viandaDtoRta = this.fachada.agregar(viandaDto);
     System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     //statsd.incrementCounter("viandas_agregadas");
     System.out.println("!!!!!???????????????????????????!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
+    Gauge.builder("Viandas_agregadas", () -> 1)
+        .description("Las viandas que se van agregando")
+        .strongReference(true)
+        .register(registry);
     //statsd.gauge("viandas_agregadas", 1);
     //myGauge.set(1);
     //statsd.stop();
