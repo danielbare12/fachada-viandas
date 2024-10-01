@@ -19,6 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import io.javalin.Javalin;
 import io.javalin.http.HttpStatus;
 import io.javalin.micrometer.MicrometerPlugin;
+import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics;
 import io.micrometer.core.instrument.binder.jvm.JvmHeapPressureMetrics;
@@ -60,6 +61,9 @@ public class WebApp {
         .description("Random number from My-Application.")
         .strongReference(true)
         .register(registry);
+    Counter viandasCounter = Counter.builder("viandas_agregadas_total")
+        .description("Total number of viandas added")
+        .register(registry);
 
     // seteamos el registro dentro de la config de Micrometer
     final var micrometerPlugin =
@@ -84,7 +88,7 @@ public class WebApp {
     //Javalin app = Javalin.create().start(port);
     Javalin app = Javalin.create(config -> { config.registerPlugin(micrometerPlugin); }).start(port);
 
-    var viandaController = new ViandaController(fachada);
+    var viandaController = new ViandaController(fachada,viandasCounter);
     fachada.setHeladerasProxy(new HeladerasProxy(objectMapper));
 
 

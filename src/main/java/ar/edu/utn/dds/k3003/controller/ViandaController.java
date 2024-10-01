@@ -39,7 +39,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ViandaController {
 
   private final Fachada fachada;
-
+  private final Counter viandasCounter;
   // Metricas
 
   // Instancia de StatsDClient
@@ -49,8 +49,10 @@ public class ViandaController {
       8125           // Puerto donde escucha el agente
   );
 
-  public ViandaController(Fachada fachada){
+  public ViandaController(Fachada fachada, Counter viandasCounter){
+
     this.fachada = fachada;
+    this.viandasCounter = viandasCounter;
   }
 
   public void agregar(Context context){
@@ -80,6 +82,7 @@ public class ViandaController {
     //statsd.gauge("viandas_agregadas", 1);
     //myGauge.set(1);
     //statsd.stop();
+    viandasCounter.increment();
     context.json(viandaDtoRta);
     context.status(HttpStatus.CREATED);
   }
