@@ -11,6 +11,7 @@ import com.timgroup.statsd.StatsDClient;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.DistributionSummary;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.step.StepMeterRegistry;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -40,6 +41,7 @@ public class ViandaController {
 
   private final Fachada fachada;
   private final Counter viandasCounter;
+  private final Gauge viandaGauge;
   // Metricas
 
   // Instancia de StatsDClient
@@ -49,40 +51,37 @@ public class ViandaController {
       8125           // Puerto donde escucha el agente
   );
 
-  public ViandaController(Fachada fachada, Counter viandasCounter){
+  public ViandaController(Fachada fachada, Counter viandasCounter,Gauge viandaGauge){
 
     this.fachada = fachada;
     this.viandasCounter = viandasCounter;
+    this.viandaGauge = viandaGauge;
+
   }
 
   public void agregar(Context context){
-    //final var metricsUtils = new DDMetricsUtils("transferencias");
-    //final var registry = metricsUtils.getRegistry();
-    //final var myGauge = registry.gauge("dds.unGauge", new AtomicInteger(0));
+
     final var registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
 
     ViandaDTO viandaDto = context.bodyAsClass(ViandaDTO.class);
+
     var viandaDtoRta = this.fachada.agregar(viandaDto);
-    System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    //statsd.incrementCounter("viandas_agregadas");
-    System.out.println("!!!!!???????????????????????????!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
     registry.config().commonTags("app", "metrics-sample");
-/*
-    var postCounter = Counter.builder("Viandas_agregadas")
-        .description("Las viandas que se van agregando")
-        .register(registry);
-    postCounter.increment();
-*/
-    Gauge.builder("viandas_agregadas", () -> (int)(1 * 1000))
+
+    //viandasCounter.increment();
+    Gauge.builder("viandaAgregada", () -> (int)(Math.random() * 1000))
         .description("Random number from My-Application.")
         .strongReference(true)
         .register(registry);
-    new MicrometerPlugin(config -> config.registry = registry);
-    //statsd.gauge("viandas_agregadas", 1);
-    //myGauge.set(1);
-    //statsd.stop();
-    viandasCounter.increment();
+
+    DistributionSummary summary = DistributionSummary.builder("probando_distribution")
+        .description("Tracks values and allows reset-like behavior")
+        .register(registry);
+
+    // Agregar valores al resumen
+    summary.record(1.0);
+
     context.json(viandaDtoRta);
     context.status(HttpStatus.CREATED);
   }

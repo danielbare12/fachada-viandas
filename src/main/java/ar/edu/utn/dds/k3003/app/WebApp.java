@@ -57,10 +57,11 @@ public class WebApp {
     new FileDescriptorMetrics().bindTo(registry);
 
     // agregamos métricas custom de nuestro dominio
-    Gauge.builder("metrica_prueba", () -> (int)(Math.random() * 1000))
+    Gauge viandaGauge = Gauge.builder("metrica_prueba", () -> (int)(Math.random() * 1000))
         .description("Random number from My-Application.")
         .strongReference(true)
         .register(registry);
+
     Counter viandasCounter = Counter.builder("viandas_agregadas_total")
         .description("Total number of viandas added")
         .register(registry);
@@ -68,27 +69,10 @@ public class WebApp {
     // seteamos el registro dentro de la config de Micrometer
     final var micrometerPlugin =
         new MicrometerPlugin(config -> config.registry = registry);
-/*
-    final var metricsUtils = new DDMetricsUtils("transferencias");
-    final var registry = metricsUtils.getRegistry();
 
-    // Metricas
-    final var myGauge = registry.gauge("dds.unGauge", new AtomicInteger(0));
-
-
-    final var micrometerPlugin = new MicrometerPlugin(config -> config.registry = registry);
-
-    final var app = Javalin.create(config -> {
-      config.registerPlugin(micrometerPlugin);
-    }).start(port);
-
-    myGauge.set(1);
-*/
-
-    //Javalin app = Javalin.create().start(port);
     Javalin app = Javalin.create(config -> { config.registerPlugin(micrometerPlugin); }).start(port);
 
-    var viandaController = new ViandaController(fachada,viandasCounter);
+    var viandaController = new ViandaController(fachada,viandasCounter,viandaGauge);
     fachada.setHeladerasProxy(new HeladerasProxy(objectMapper));
 
 
