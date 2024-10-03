@@ -70,8 +70,7 @@ public class WebApp {
         .description("Tracks values and allows reset-like behavior")
         .register(registry);
 
-    // Agregar valores al resumen
-    summary.record(1.0);
+
 
     // seteamos el registro dentro de la config de Micrometer
     final var micrometerPlugin =
@@ -79,7 +78,7 @@ public class WebApp {
 
     Javalin app = Javalin.create(config -> { config.registerPlugin(micrometerPlugin); }).start(port);
 
-    var viandaController = new ViandaController(fachada,viandasCounter,viandaGauge);
+    var viandaController = new ViandaController(fachada,viandasCounter,viandaGauge,summary);
     fachada.setHeladerasProxy(new HeladerasProxy(objectMapper));
 
 

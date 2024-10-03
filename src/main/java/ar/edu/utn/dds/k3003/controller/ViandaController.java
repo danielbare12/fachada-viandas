@@ -42,6 +42,7 @@ public class ViandaController {
   private final Fachada fachada;
   private final Counter viandasCounter;
   private final Gauge viandaGauge;
+  private final DistributionSummary summary;
   // Metricas
 
   // Instancia de StatsDClient
@@ -51,11 +52,12 @@ public class ViandaController {
       8125           // Puerto donde escucha el agente
   );
 
-  public ViandaController(Fachada fachada, Counter viandasCounter,Gauge viandaGauge){
+  public ViandaController(Fachada fachada, Counter viandasCounter,Gauge viandaGauge,DistributionSummary summary){
 
     this.fachada = fachada;
     this.viandasCounter = viandasCounter;
     this.viandaGauge = viandaGauge;
+    this.summary = summary;
 
   }
 
@@ -76,6 +78,7 @@ public class ViandaController {
         .strongReference(true)
         .register(registry);
       */
+    summary.record(1.0);
 
 
     context.json(viandaDtoRta);
