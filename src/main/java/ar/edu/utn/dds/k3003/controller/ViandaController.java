@@ -69,18 +69,14 @@ public class ViandaController {
 
     registry.config().commonTags("app", "metrics-sample");
 
-    //viandasCounter.increment();
+    viandasCounter.increment();
+    /*
     Gauge.builder("viandaAgregada", () -> (int)(Math.random() * 1000))
         .description("Random number from My-Application.")
         .strongReference(true)
         .register(registry);
+      */
 
-    DistributionSummary summary = DistributionSummary.builder("probando_distribution")
-        .description("Tracks values and allows reset-like behavior")
-        .register(registry);
-
-    // Agregar valores al resumen
-    summary.record(1.0);
 
     context.json(viandaDtoRta);
     context.status(HttpStatus.CREATED);

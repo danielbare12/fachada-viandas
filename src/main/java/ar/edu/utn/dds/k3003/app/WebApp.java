@@ -20,6 +20,7 @@ import io.javalin.Javalin;
 import io.javalin.http.HttpStatus;
 import io.javalin.micrometer.MicrometerPlugin;
 import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.DistributionSummary;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics;
 import io.micrometer.core.instrument.binder.jvm.JvmHeapPressureMetrics;
@@ -65,6 +66,12 @@ public class WebApp {
     Counter viandasCounter = Counter.builder("viandas_agregadas_total")
         .description("Total number of viandas added")
         .register(registry);
+    DistributionSummary summary = DistributionSummary.builder("probando_distribution")
+        .description("Tracks values and allows reset-like behavior")
+        .register(registry);
+
+    // Agregar valores al resumen
+    summary.record(1.0);
 
     // seteamos el registro dentro de la config de Micrometer
     final var micrometerPlugin =
